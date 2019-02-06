@@ -1,6 +1,4 @@
-const userSchema = new userSchema({
-    email: String,
-    password: String,
-})
-
-// module.exports = 
+function User(username, password){
+    this.username = username;
+    this.password = password;
+}

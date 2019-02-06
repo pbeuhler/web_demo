@@ -4,27 +4,25 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { LoginFormComponent } from './login-form/login-form.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { UserService } from './user.service';
-import { AuthorizerGuard } from './authorizer.guard';
+import { CounterComponent } from './counter/counter.component';
+import { LoginComponent } from './login/login.component';
+import { AuthService } from './auth.service';
+import { HttpClientModule } from '@angular/common/http'
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    LoginFormComponent,
-    DashboardComponent
+    CounterComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
   ],
   providers: [
-    UserService,
-    AuthorizerGuard,
+    AuthService,
   ],
   bootstrap: [AppComponent]
 })

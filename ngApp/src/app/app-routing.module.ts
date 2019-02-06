@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { LoginFormComponent } from './login-form/login-form.component';
-import { AuthorizerGuard } from './authorizer.guard'
+// import { DashboardComponent } from './dashboard/dashboard.component';
+import { LoginComponent } from './login/login.component';
+// import { AuthorizerGuard } from './authorizer.guard';
+import { CounterComponent } from './counter/counter.component'
 
 const routes: Routes = [  
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: LoginFormComponent},
-  { path: 'dashboard', canActivate: [AuthorizerGuard], component: DashboardComponent },
+  { path: 'login', component: LoginComponent},
+  // { path: 'dashboard', canActivate: [AuthorizerGuard], component: DashboardComponent },
+  { path: 'counter', component: CounterComponent },
 ];
 
 @NgModule({
