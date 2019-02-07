@@ -8,6 +8,7 @@ import { CounterComponent } from './counter/counter.component';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './auth.service';
 import { HttpClientModule } from '@angular/common/http'
+import { CounterService } from './counter.service';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { HttpClientModule } from '@angular/common/http'
   ],
   providers: [
     AuthService,
+    CounterService,
   ],
   bootstrap: [AppComponent]
 })

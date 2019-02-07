@@ -10,7 +10,8 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   loginUser(user) {
-    return this.http.post(this._loginUrl, user)
+    console.log("hello auth")
+    return this.http.post<any>(this._loginUrl, user)
   }
 
 }
