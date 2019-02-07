@@ -11,9 +11,9 @@ app.use(bodyParser.json())
 
 app.use('/api', api)
 app.get('/', function(req, res){
-    res.send('Hello from server')
+    res.send('Hello from server');
 })
 
 app.listen(PORT, function(){
-    console.log('Server running on localhost: ' + PORT)
+    console.log('Server running on localhost: ' + PORT);
 })

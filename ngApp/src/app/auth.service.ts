@@ -10,8 +10,16 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   loginUser(user) {
-    console.log("hello auth")
-    return this.http.post<any>(this._loginUrl, user)
+    console.log("hello auth");
+    return this.http.post<any>(this._loginUrl, user);
+  }
+
+  loggedIn(){
+    return localStorage.getItem('token') != null;
+  }
+
+  getToken() {
+    return localStorage.getItem('token');
   }
 
 }
