@@ -3,6 +3,7 @@ const router = express.Router()
 const jwt = require('jsonwebtoken')
 
 var count = 0;
+var prevCount = 0;
 
 router.get('/', (req, res) => {
     res.send('From API route');
@@ -28,17 +29,27 @@ router.post('/login', (req, res) => {
 
 
 router.get('/counter', verifyToken, (req, res) => {
-    // res.json(count);
+    count = 0;
+    prevCount = 0;
+    res.json(count);
 })
 
 router.get('/increment', verifyToken, (req, res) => {
-    console.log(count)
+    // console.log(count)
+    prevCount = count;
     if(count*2 > 1){
         count = 2*count
     }
     else{
         count = 1
     }
+    res.json([prevCount, count])
+})
+
+router.get('/decrement', verifyToken, (req, res) => {
+    console.log("was: " + count)
+    console.log("will be: " + prevCount)
+    count = prevCount
     res.json(count)
 })
 

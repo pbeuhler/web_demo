@@ -13,14 +13,12 @@ import { DialogService } from '../dialog.service';
 export class CounterComponent implements OnInit {
 
   private _incrementUrl = "http://localhost:3000/api/increment"
+  private _decrementUrl = "http://localhost:3000/api/decrement"
 
   count: number = 0;
   current: number = 0;
-  next: number = 0; 
-
-  clickCount(): void{
-    this.count++
-  }
+  next: number = 1; 
+  mess: string = "";
 
   increment(){
     this._httpClient.get(this._incrementUrl).subscribe((res)=>{
@@ -29,16 +27,21 @@ export class CounterComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialogService.openConfirmDialog("Current: {{current}} Next: {{next}}")
+    this._httpClient.get(this._incrementUrl).subscribe((res)=>{
+      this.current = Number(res[0]);
+      this.next = Number(res[1]);
+    });
+    this.mess = "Current: " + String(this.current) + "\nNext: " + String(this.next)
+    this.dialogService.openConfirmDialog(this.mess)
     .afterClosed().subscribe( res => {
       console.log(res);
       if(res){
-        this._httpClient.get(this._incrementUrl).subscribe((res)=>{
-            this.count = Number(res);
-        });
+        this.count = this.next;
       }
       else{
-
+        this._httpClient.get(this._decrementUrl).subscribe((res)=>{
+          console.log('reset')
+        });
       }
     });
   }
