@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { CounterService } from '../counter.service';
 import { Router } from '@angular/router';
+import { DialogService } from '../dialog.service';
 
 @Component({
   selector: 'app-counter',
@@ -24,10 +25,24 @@ export class CounterComponent implements OnInit {
     });
   }
 
+  openDialog() {
+    this.dialogService.openConfirmDialog("Current: Next: ")
+    .afterClosed().subscribe( res => {
+      console.log(res);
+      if(res){
+
+      }
+      else{
+        
+      }
+    });
+  }
+
   constructor(
     private _counterService: CounterService,
     private _router: Router,
     private _httpClient: HttpClient,
+    private dialogService: DialogService,
     ) { }
 
   ngOnInit() {
