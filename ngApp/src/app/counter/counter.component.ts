@@ -30,19 +30,18 @@ export class CounterComponent implements OnInit {
     this._httpClient.get(this._incrementUrl).subscribe((res)=>{
       this.current = Number(res[0]);
       this.next = Number(res[1]);
-    });
-    this.mess = "Current: " + String(this.current) + "\nNext: " + String(this.next)
-    this.dialogService.openConfirmDialog(this.mess)
-    .afterClosed().subscribe( res => {
-      console.log(res);
-      if(res){
-        this.count = this.next;
-      }
-      else{
-        this._httpClient.get(this._decrementUrl).subscribe((res)=>{
-          console.log('reset')
-        });
-      }
+      this.mess = "Current: " + String(this.current) + "\nNext: " + String(this.next)
+      this.dialogService.openConfirmDialog(this.mess)
+      .afterClosed().subscribe( res => {
+        console.log(res);
+        if(res){
+          this.count = this.next;
+        }
+        else{
+          this._httpClient.get(this._decrementUrl).subscribe((res)=>{
+          });
+        }
+      });
     });
   }
 
