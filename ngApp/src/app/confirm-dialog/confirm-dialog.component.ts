@@ -20,11 +20,11 @@ export class ConfirmDialogComponent implements OnInit {
   }
 
   clickCancel(){
-    this.dialogRef.close(false)
+    this.dialogRef.close(false);
   }
 
   clickConfirm(){
-    this.dialogRef.close(true)
+    this.dialogRef.close(true);
   }
 
 }

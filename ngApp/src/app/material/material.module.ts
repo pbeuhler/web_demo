@@ -1,5 +1,3 @@
-import { CommonModule } from '@angular/common';
-import { Injectable } from '@angular/core';
 import { NgModule } from '@angular/core';
 
     import {
@@ -9,7 +7,6 @@ import { NgModule } from '@angular/core';
       MatIconModule,
       MatCardModule,
       MatDialogModule,
-      MAT_DIALOG_DATA,
 
     } from '@angular/material';
 

@@ -10,8 +10,6 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   loginUserData = {};
-  private validationError = false;
-  private isMenuOpen = true;
 
   constructor(
     private _auth: AuthService,
@@ -31,7 +29,6 @@ export class LoginComponent implements OnInit {
       err => {
         var errorMessage = document.getElementById("loginError");
         errorMessage.style.display = "block";
-        //this.validationError = true//console.log(err)
       }
     )
   }
