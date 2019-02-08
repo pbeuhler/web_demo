@@ -27,17 +27,18 @@ export class CounterComponent implements OnInit {
   }
 
   openDialog() {
+    //get from server, update values to populate "Current: " and "Next: "
     this._httpClient.get(this._incrementUrl).subscribe((res)=>{
       this.current = Number(res[0]);
       this.next = Number(res[1]);
       this.mess = "Current: " + String(this.current) + "\nNext: " + String(this.next)
       this.dialogService.openConfirmDialog(this.mess)
       .afterClosed().subscribe( res => {
-        console.log(res);
         if(res){
           this.count = this.next;
         }
         else{
+          //undo updating values from server
           this._httpClient.get(this._decrementUrl).subscribe((res)=>{
           });
         }
@@ -58,6 +59,7 @@ export class CounterComponent implements OnInit {
       res => this.count = res,
       err => {
         if(err instanceof HttpErrorResponse){
+          //no token
           if(err.status === 401){
             this._router.navigate(['/login']);
           }

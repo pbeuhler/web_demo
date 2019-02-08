@@ -42,13 +42,10 @@ router.get('/increment', verifyToken, (req, res) => {
     else{
         count = 1
     }
-    console.log("returning prevCount: " + prevCount + " count: " + count)
     res.json([prevCount, count])
 })
 
 router.get('/decrement', verifyToken, (req, res) => {
-    console.log("count: " + count)
-    console.log("prevCount: " + prevCount)
     count = prevCount
     res.json(count)
 })
