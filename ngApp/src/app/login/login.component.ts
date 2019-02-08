@@ -9,7 +9,9 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  loginUserData = {}
+  loginUserData = {};
+  private validationError = false;
+  private isMenuOpen = true;
 
   constructor(
     private _auth: AuthService,
@@ -23,11 +25,14 @@ export class LoginComponent implements OnInit {
     this._auth.loginUser(this.loginUserData)
     .subscribe(
       res => {
-        console.log(res)
-        localStorage.setItem('token', res.token)
-        this._router.navigate(['/counter'])
+        localStorage.setItem('token', res.token);
+        this._router.navigate(['/counter']);
         },
-      err => console.log(err)
+      err => {
+        var errorMessage = document.getElementById("loginError");
+        errorMessage.style.display = "block";
+        //this.validationError = true//console.log(err)
+      }
     )
   }
 
