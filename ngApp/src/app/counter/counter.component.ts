@@ -8,18 +8,32 @@ import { Router } from '@angular/router';
   templateUrl: './counter.component.html',
   styleUrls: ['./counter.component.css']
 })
+
 export class CounterComponent implements OnInit {
 
-  counter = []
+  private _incrementUrl = "http://localhost:3000/api/increment"
+
+  count: number = 0;
+  clickCount(): void{
+    this.count++
+  }
+
+  increment(){
+    this._httpClient.get(this._incrementUrl).subscribe((res)=>{
+        console.log(res);
+    });
+  }
 
   constructor(
     private _counterService: CounterService,
-    private _router: Router    ) { }
+    private _router: Router,
+    private _httpClient: HttpClient,
+    ) { }
 
   ngOnInit() {
     this._counterService.getCounter()
     .subscribe(
-      res => this.counter = res,
+      res => this.count = res,
       err => {
         if(err instanceof HttpErrorResponse){
           if(err.status === 401){

@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 const jwt = require('jsonwebtoken')
 
+var count = 0;
+
 router.get('/', (req, res) => {
     res.send('From API route');
 })
@@ -24,8 +26,20 @@ router.post('/login', (req, res) => {
     }
 })
 
-router.get('/counter', verifyToken, (req, res) => {
 
+router.get('/counter', verifyToken, (req, res) => {
+    // res.json(count);
+})
+
+router.get('/increment', verifyToken, (req, res) => {
+    console.log(count)
+    if(count*2 > 1){
+        count = 2*count
+    }
+    else{
+        count = 1
+    }
+    res.json(count)
 })
 
 function verifyToken(req, res, next) {
