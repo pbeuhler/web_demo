@@ -15,6 +15,9 @@ export class CounterComponent implements OnInit {
   private _incrementUrl = "http://localhost:3000/api/increment"
 
   count: number = 0;
+  current: number = 0;
+  next: number = 0; 
+
   clickCount(): void{
     this.count++
   }
@@ -26,14 +29,16 @@ export class CounterComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialogService.openConfirmDialog("Current: Next: ")
+    this.dialogService.openConfirmDialog("Current: {{current}} Next: {{next}}")
     .afterClosed().subscribe( res => {
       console.log(res);
       if(res){
-
+        this._httpClient.get(this._incrementUrl).subscribe((res)=>{
+            this.count = Number(res);
+        });
       }
       else{
-        
+
       }
     });
   }
