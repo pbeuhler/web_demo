@@ -1,6 +1,8 @@
 const express = require('express')
 const router = express.Router()
 const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt')
+const saltRounds = 10;
 
 var count = 0;
 var prevCount = 0;
@@ -14,9 +16,21 @@ function User(username, password){
     this.password = password;
 }
 
+function hashPassword(password) {
+    var salt = bcrypt.genSaltSync(saltRounds);
+    var hash = bcrypt.hashSync(password, salt);
+    return hash;
+}
+
+function makeDBRequest(userData) {
+    var tempSalt = bcrypt.genSaltSync(saltRounds);
+    var tempHash = bcrypt.hashSync('admin', tempSalt);
+    return (userData.username === 'admin' && bcrypt.compareSync('admin', tempHash))
+}
+
 router.post('/login', (req, res) => {
     let userData = req.body
-    if(userData.username == "admin" && userData.password == "admin"){
+    if(makeDBRequest(userData)){
         let user = new User(userData.username, userData.password);
         let payload = { subject:  user.username};
         let token = jwt.sign(payload, 'secretKey');
